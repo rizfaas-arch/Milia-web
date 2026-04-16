@@ -498,7 +498,7 @@ cursor:pointer;
 </div>
 
 <audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mp3">
+<source src="Hindia-everything u are.mp3" type="audio/mp3">
 </audio>
 
 <script>
@@ -537,6 +537,7 @@ startFireworks();
 function login(){
 if(username.value==="Milia" && password.value==="123"){
 loginPopup.style.display="none";
+playMusic(); //musik hindiaaaaaa
 document.getElementById("bgMusic").play();
 restartHome();
 }else alert("Username atau Password salah!");
@@ -697,6 +698,19 @@ document.getElementById("envelopeBox").style.display="none";
 document.getElementById("envelope").classList.remove("open");
 }
 });
+let musicStarted = false;
+
+function playMusic(){
+  const music = document.getElementById("bgMusic");
+  if(!musicStarted){
+    music.play().catch(()=>{});
+    musicStarted = true;
+  }
+}
+
+/* trigger saat user klik pertama */
+document.addEventListener("click", playMusic);
+</script>
 </script>
 <!-- ENVELOPE PREMIUM -->
 <div class="envelope-wrapper" id="envelopeBox">
