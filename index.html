@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+
+<style>
+:root{
+--bg1:#ff9a9e;
+--bg2:#fad0c4;
+--bg3:#fbc2eb;
+--bg4:#a6c1ee;
+--glass:rgba(255,255,255,0.25);
+--text:white;
+
+/* TAMBAHAN */
+--paper-bg:#fffdf5;
+--paper-text:#333;
+--wish-bg:#ffffff;
+}
+:root{
+--bg1:#ff9a9e;
+--bg2:#fad0c4;
+--bg3:#fbc2eb;
+--bg4:#a6c1ee;
+--glass:rgba(255,255,255,0.25);
+--text:white;
+}
+
+.dark{
+--bg1:#1e1e2f;
+--bg2:#23243a;
+--bg3:#2b2d4a;
+--bg4:#1c1c2b;
+--glass:rgba(0,0,0,0.4);
+--text:white;
+--paper-bg:#2b2d4a;
+--paper-text:white;
+--wish-bg:#3a3c5c;
+}
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+overflow-x:hidden;
+color:var(--text);
+background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+background-size:400% 400%;
+animation:gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* GLASS EFFECT */
+.glass{
+background:var(--glass);
+backdrop-filter:blur(15px);
+-webkit-backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.2);
+border-radius:15px;
+}
+
+/* NAVBAR */
+.navbar{
+position:fixed;
+top:15px;
+right:20px;
+display:flex;
+gap:20px;
+z-index:1000;
+padding:10px 20px;
+}
+.navbar a{
+text-decoration:none;
+font-weight:bold;
+cursor:pointer;
+color:var(--text);
+}
+
+/* DARK MODE BUTTON */
+.modeToggle{
+position:fixed;
+top:15px;
+left:20px;
+cursor:pointer;
+padding:10px 15px;
+z-index:1000;
+}
+
+/* FOOTER */
+.footer{
+position:fixed;
+bottom:0;
+width:100%;
+text-align:center;
+padding:6px;
+}
+
+/* PAGE */
+.page{
+display:none;
+margin-top:120px;
+text-align:center;
+padding:20px;
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+.popup-content{
+padding:30px;
+width:300px;
+text-align:center;
+}
+
+input{
+width:90%;
+padding:8px;
+margin:8px 0;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#ff69b4;
+color:white;
+}
+
+/* FOTO */
+#mainPhoto{
+  width:350px;
+  opacity:0;
+  transform:scale(0.8);
+  transition:2s;
+  border-radius:20px;
+  display:block;
+  margin:20px auto;   /* bikin center horizontal */
+}
+#mainPhoto.show{
+opacity:1;
+transform:scale(1);
+}
+
+/* GALLERY */
+.gallery{
+display:none;
+margin-top:30px;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+padding:20px;
+}
+.gallery img{
+width:100%;
+border-radius:15px;
+transition:0.3s;
+cursor:pointer;
+}
+.gallery:hover img{filter:blur(3px);}
+.gallery img:hover{
+transform:scale(1.1);
+filter:blur(0);
+}
+
+/* LOVE LETTER */
+.love-letter{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:25px;
+width:300px;
+display:none;
+z-index:3000;
+}
+
+/* CONFETTI */
+.confetti{
+position:fixed;
+width:8px;
+height:8px;
+top:-10px;
+animation:fall linear forwards;
+}
+@keyframes fall{
+to{transform:translateY(110vh) rotate(720deg);}
+}
+
+/* HEART */
+.heart{
+position:fixed;
+color:red;
+animation:fallHeart 5s linear forwards;
+}
+@keyframes fallHeart{
+to{transform:translateY(110vh);}
+}
+
+/* FIREWORK */
+.firework{
+position:fixed;
+width:6px;
+height:6px;
+border-radius:50%;
+}
+/* TOMBOL SURAT */
+#letterBtn{
+position:fixed;
+bottom:25px;
+left:25px;
+font-size:35px;
+cursor:pointer;
+z-index:2000;
+transition:0.3s;
+}
+#letterBtn:hover{
+transform:scale(1.2);
+}
+
+#notifDot{
+position:absolute;
+top:0;
+right:0;
+width:12px;
+height:12px;
+background:red;
+border-radius:50%;
+display:none;
+}
+
+/* TOAST */
+#toast{
+position:fixed;
+bottom:80px;
+left:50%;
+transform:translateX(-50%);
+background:#ff69b4;
+color:white;
+padding:10px 20px;
+border-radius:20px;
+display:none;
+z-index:3000;
+}
+/* ===== ENVELOPE PREMIUM ===== */
+#letterBtn{
+display:none; /* awalnya hidden */
+position:fixed;
+bottom:25px;
+left:25px;
+font-size:38px;
+cursor:pointer;
+z-index:3000;
+transition:0.3s;
+}
+
+#letterBtn:hover{
+transform:scale(1.2);
+}
+
+.envelope-wrapper{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+display:none;
+z-index:5000;
+perspective:1000px;
+}
+
+.envelope{
+width:320px;
+height:200px;
+position:relative;
+background:#ffb6c1;
+border-radius:10px;
+cursor:pointer;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.envelope-flap{
+position:absolute;
+width:100%;
+height:100%;
+background:#ff69b4;
+clip-path:polygon(0 0,100% 0,50% 60%);
+transform-origin:top;
+transition:1s;
+}
+
+.envelope.open .envelope-flap{
+transform:rotateX(180deg);
+}
+
+.letter-paper{
+position:absolute;
+top:100%;
+left:5%;
+width:90%;
+max-height:250px;
+background:var(--paper-bg);
+color:var(--paper-text);
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+transition:1s;
+overflow-y:auto;
+overflow-x:hidden;
+font-family:serif;
+scroll-behavior:smooth;
+}
+
+.envelope.open .letter-paper{
+top:-140px;
+}
+
+/* Saat amplop kebuka */
+.envelope.open .letter-paper{
+top:-140px;
+}
+
+/* Scrollbar biar cakep */
+.letter-paper::-webkit-scrollbar{
+width:6px;
+}
+
+.letter-paper::-webkit-scrollbar-thumb{
+background:#ff69b4;
+border-radius:10px;
+}
+
+.envelope.open .letter-paper{
+top:-120px;
+}
+/* ===== CLOSE BUTTON ===== */
+.close-envelope{
+position:absolute;
+top:8px;
+right:10px;
+font-size:18px;
+cursor:pointer;
+color:white;
+z-index:6000;
+}
+.envelope{
+overflow:visible;
+}
+/* ===== FIX SIZE PAPER ===== */
+.letter-paper{
+position:absolute;
+top:100%;
+left:5%;
+width:90%;
+height:180px;   /* lebih proporsional */
+background:#fffdf5;
+color:#333;
+padding:15px;
+border-radius:12px;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+transition:1s;
+overflow-y:auto;
+font-family:serif;
+}
+
+/* Dark mode paper */
+.dark .letter-paper{
+background:#2b2d4a;
+color:white;
+}
+
+/* Dark mode envelope */
+.dark .envelope{
+background:#2b2d4a;
+}
+
+.dark .envelope-flap{
+background:#1e1e2f;
+}
+.wish-item{
+position:relative;
+background:var(--wish-bg);
+color:var(--paper-text);
+padding:10px;
+margin-bottom:10px;
+border-radius:10px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+font-size:14px;
+}
+.delete-btn{
+position:absolute;
+top:5px;
+right:8px;
+background:red;
+color:white;
+border:none;
+border-radius:50%;
+width:20px;
+height:20px;
+font-size:12px;
+cursor:pointer;
+}
+</style>
+</head>
+<div class="navbar glass">
+<a onclick="restartHome()">Home</a>
+<a onclick="openMaps()">Lokasi</a>
+<a onclick="showPage('about')">News</a>
+<a onclick="showPage('rizfa')">Rizfa</a>
+<a onclick="showPage('wish')">Wish</a>
+</div>
+
+<div class="popup" id="loginPopup">
+<div class="popup-content glass">
+<h2>Hallo Lea 💖</h2>
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<br>
+<button onclick="login()">Masuk</button>
+</div>
+</div>
+
+<!-- TOMBOL SURAT -->
+<div id="letterBtn" onclick="openSavedWish()">
+  ✉️
+  <span id="notifDot"></span>
+</div>
+
+<!-- NOTIF POPUP -->
+<div id="toast">Wish sudah terkirim 💌 Cek di ikon surat!</div>
+<body>
+
+<div class="modeToggle glass" onclick="toggleMode()">🌙 Mode</div>
+<div class="page" id="home">
+<h1 id="typingText"></h1>
+<p>happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥</p>
+<img src="milia.jpeg" id="mainPhoto">
+<div class="gallery" id="gallery">
+<img src="25.png" onclick="openLetter(0)">
+<img src="lea.png" onclick="openLetter(1)">
+<img src="HBD.png" onclick="openLetter(2)">
+<img src="liaa.png" onclick="openLetter(3)">
+<img src="idm.png" onclick="openLetter(4)">
+<img src="liaa.png" onclick="openLetter(5)">
+</div>
+</div>
+
+<div class="page" id="about">
+<h1>News</h1>
+<img src="Lia.png" width="600">
+<p>Keep Being You!</p>
+<button onclick="restartHome()">Kembali</button>
+</div>
+
+<div class="page" id="rizfa">
+<h1>Rizfa</h1>
+<img src="final.png" width="400">
+<p>Rizfa Ardyafa Syauqi as a Web Developer ✨</p>
+<button onclick="restartHome()">Kembali</button>
+</div>
+
+<div class="page" id="wish">
+<h1>Wish</h1>
+
+<div class="glass" style="padding:20px; max-width:400px; margin:20px auto;">
+  <textarea id="wishInput" placeholder="Tulis harapan kamu disini..." 
+  style="width:100%; height:120px; border-radius:10px; border:none; padding:10px;"></textarea>
+  <br><br>
+  <button onclick="sendWish()">Kirim Wish 💌</button>
+</div>
+
+<button onclick="restartHome()">Kembali</button>
+</div>
+
+<div class="love-letter glass" id="letter">
+<h3>💌 Untuk Kamu</h3>
+<p id="letterText"></p>
+<button onclick="closeLetter()">Tutup</button>
+</div>
+
+<div class="footer glass">
+® Copyright by Rizfa
+</div>
+
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const letters=[
+"maap ya kalo masih jelek, lagi belajar soalnya",
+"happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥",
+"Traktirannya jangan lupa ya leaaa",
+"ga tau lagi gua mau nulis apaan",
+"bissmillah dapet Berry Manuka Fore hehehe",
+"Sehat terus ya bub"
+];
+
+function showPage(id){
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+function restartHome(){
+typingText.innerHTML="";
+mainPhoto.classList.remove("show");
+mainPhoto.style.display="block";
+gallery.style.display="none";
+showPage("home");
+typeText("🎉 Selamat Ulang Tahun! 🎂");
+
+setTimeout(()=>{mainPhoto.classList.add("show");},500);
+setTimeout(()=>{
+mainPhoto.style.display="none";
+gallery.style.display="grid";
+startConfetti();
+startHearts();
+startFireworks();
+},7000);
+}
+
+function login(){
+if(username.value==="Milia" && password.value==="123"){
+loginPopup.style.display="none";
+document.getElementById("bgMusic").play();
+restartHome();
+}else alert("Username atau Password salah!");
+}
+
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+function typeText(text){
+let i=0;
+function typing(){
+if(i<text.length){
+typingText.innerHTML+=text.charAt(i);
+i++; setTimeout(typing,100);
+}}
+typing();
+}
+
+function startConfetti(){
+for(let i=0;i<50;i++){
+let c=document.createElement("div");
+c.classList.add("confetti");
+c.style.left=Math.random()*100+"vw";
+c.style.backgroundColor=
+["#ff0","#ff69b4","#00f","#0f0","#f00","#0ff"][Math.floor(Math.random()*6)];
+c.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),5000);
+}}
+
+function startHearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.classList.add("heart");
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*20+20)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},1000);
+}
+
+function startFireworks(){
+setInterval(()=>{
+let x=Math.random()*window.innerWidth;
+let y=Math.random()*window.innerHeight/2;
+for(let i=0;i<20;i++){
+let fw=document.createElement("div");
+fw.classList.add("firework");
+fw.style.backgroundColor=
+["red","yellow","blue","lime","orange","cyan"][Math.floor(Math.random()*6)];
+fw.style.left=x+"px";
+fw.style.top=y+"px";
+let angle=Math.random()*2*Math.PI;
+let distance=Math.random()*100;
+fw.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${Math.cos(angle)*distance}px,${Math.sin(angle)*distance}px)`,opacity:0}
+],{duration:1000});
+document.body.appendChild(fw);
+setTimeout(()=>fw.remove(),1000);
+}
+},2000);
+}
+
+function openLetter(i){
+letterText.innerText=letters[i];
+letter.style.display="block";
+}
+function closeLetter(){letter.style.display="none";}
+
+function openMaps(){
+window.open("https://www.google.com/maps/place/Jl.+Pacilong+No.18,+RT.04%2FRW.10,+Kb.+Pedes,+Kec.+Tanah+Sereal,+Kota+Bogor,+Jawa+Barat+16162/@-6.56593,106.7935206,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69c41568b4b527:0x4e446a27304314c5!8m2!3d-6.5659353!4d106.7960955!16s%2Fg%2F11j2ynfhn6?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D","_blank");
+}
+let savedWish = "";
+
+/* ===== WISH PREMIUM SYSTEM ===== */
+
+let wishes = JSON.parse(localStorage.getItem("birthdayWishes")) || [];
+
+/* Saat login tampilkan icon surat */
+function login(){
+if(username.value==="Milia" && password.value==="123"){
+loginPopup.style.display="none";
+document.getElementById("bgMusic").play();
+document.getElementById("letterBtn").style.display="block"; // tampil di home saja
+restartHome();
+}else alert("Username atau Password salah!");
+}
+
+/* Simpan banyak wish */
+function sendWish(){
+let text = document.getElementById("wishInput").value.trim();
+if(text===""){
+alert("Tulis dulu wish kamu 😆");
+return;
+}
+
+wishes.push({
+text:text,
+date:new Date().toLocaleString()
+});
+
+localStorage.setItem("birthdayWishes", JSON.stringify(wishes));
+document.getElementById("wishInput").value="";
+document.getElementById("notifDot").style.display="block";
+showToast();
+}
+
+/* Buka Inbox */
+function openSavedWish(){
+openInbox();
+}
+
+function openInbox(){
+let content = document.getElementById("letterContent");
+content.innerHTML="";
+
+if(wishes.length===0){
+content.innerHTML="<p>Belum ada wish 💭</p>";
+}else{
+wishes.forEach((w,i)=>{
+content.innerHTML+=`
+<div class="wish-item">
+<button class="delete-btn" onclick="deleteWish(${i})">×</button>
+<b>Wish ${i+1}</b><br>
+${w.text}<br>
+<small>${w.date}</small>
+</div>
+`;
+});
+}
+
+document.getElementById("envelopeBox").style.display="block";
+}
+
+function deleteWish(index){
+if(confirm("Hapus wish ini?")){
+wishes.splice(index,1);
+localStorage.setItem("birthdayWishes", JSON.stringify(wishes));
+openInbox(); // refresh tampilan
+}
+}
+
+/* Animasi buka tutup amplop */
+function toggleEnvelope(){
+document.getElementById("envelope").classList.toggle("open");
+}
+function closeEnvelope(){
+document.getElementById("envelopeBox").style.display="none";
+document.getElementById("envelope").classList.remove("open");
+}
+/* Klik luar tutup */
+window.addEventListener("click",function(e){
+if(e.target.id==="envelopeBox"){
+document.getElementById("envelopeBox").style.display="none";
+document.getElementById("envelope").classList.remove("open");
+}
+});
+</script>
+<!-- ENVELOPE PREMIUM -->
+<div class="envelope-wrapper" id="envelopeBox">
+  <div class="envelope" id="envelope">
+    <div class="close-envelope" onclick="closeEnvelope()">✖</div>
+    <div class="envelope-flap" onclick="toggleEnvelope()"></div>
+    <div class="letter-paper" id="letterContent"></div>
+  </div>
+</div>
+</div>
+</body>
+</html>
