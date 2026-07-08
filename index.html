@@ -1,725 +1,1445 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Milia 💖</title>
+  <meta name="description" content="A special birthday surprise for Milia – with love">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&family=Dancing+Script:wght@500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --rose: #c2185b;
+      --rose-light: #f48fb1;
+      --rose-dark: #880e4f;
+      --gold: #f9a825;
+      --deep: #1a0a12;
+      --shadow-rose: 0 8px 32px rgba(194, 24, 91, 0.4);
+    }
 
-<style>
-:root{
---bg1:#ff9a9e;
---bg2:#fad0c4;
---bg3:#fbc2eb;
---bg4:#a6c1ee;
---glass:rgba(255,255,255,0.25);
---text:white;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* TAMBAHAN */
---paper-bg:#fffdf5;
---paper-text:#333;
---wish-bg:#ffffff;
-}
-:root{
---bg1:#ff9a9e;
---bg2:#fad0c4;
---bg3:#fbc2eb;
---bg4:#a6c1ee;
---glass:rgba(255,255,255,0.25);
---text:white;
-}
+    body {
+      font-family: 'Lato', sans-serif;
+      color: rgba(255, 255, 255, 0.88);
+      overflow-x: hidden;
+      min-height: 100vh;
+      background: #1a0a12;
+    }
 
-.dark{
---bg1:#1e1e2f;
---bg2:#23243a;
---bg3:#2b2d4a;
---bg4:#1c1c2b;
---glass:rgba(0,0,0,0.4);
---text:white;
---paper-bg:#2b2d4a;
---paper-text:white;
---wish-bg:#3a3c5c;
-}
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(-45deg, #3d0030, #6b1a3a, #a3264e, #c2185b, #6b1a3a);
+      background-size: 500% 500%;
+      animation: gradientShift 18s ease infinite;
+      z-index: -2;
+      opacity: 0.85;
+    }
 
-body{
-margin:0;
-font-family:Arial, sans-serif;
-overflow-x:hidden;
-color:var(--text);
-background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
-background-size:400% 400%;
-animation:gradientMove 12s ease infinite;
-}
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
 
-@keyframes gradientMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
+      50% {
+        background-position: 100% 50%;
+      }
 
-/* GLASS EFFECT */
-.glass{
-background:var(--glass);
-backdrop-filter:blur(15px);
--webkit-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,0.2);
-border-radius:15px;
-}
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-/* NAVBAR */
-.navbar{
-position:fixed;
-top:15px;
-right:20px;
-display:flex;
-gap:20px;
-z-index:1000;
-padding:10px 20px;
-}
-.navbar a{
-text-decoration:none;
-font-weight:bold;
-cursor:pointer;
-color:var(--text);
-}
+    /* ROSE PETALS */
+    .petal {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      animation: petalFall linear forwards;
+    }
 
-/* DARK MODE BUTTON */
-.modeToggle{
-position:fixed;
-top:15px;
-left:20px;
-cursor:pointer;
-padding:10px 15px;
-z-index:1000;
-}
+    @keyframes petalFall {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px) rotate(0deg) scale(0.8);
+      }
 
-/* FOOTER */
-.footer{
-position:fixed;
-bottom:0;
-width:100%;
-text-align:center;
-padding:6px;
-}
+      10% {
+        opacity: 0.7;
+      }
 
-/* PAGE */
-.page{
-display:none;
-margin-top:120px;
-text-align:center;
-padding:20px;
-}
+      90% {
+        opacity: 0.5;
+      }
 
-/* POPUP */
-.popup{
-position:fixed;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:2000;
-}
-.popup-content{
-padding:30px;
-width:300px;
-text-align:center;
-}
+      100% {
+        opacity: 0;
+        transform: translateY(110vh) rotate(720deg) scale(1.1);
+      }
+    }
 
-input{
-width:90%;
-padding:8px;
-margin:8px 0;
-border-radius:8px;
-border:none;
-}
+    /* SPARKLES */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      animation: sparklePop ease-out forwards;
+    }
 
-button{
-padding:8px 15px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:#ff69b4;
-color:white;
-}
+    @keyframes sparklePop {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
 
-/* FOTO */
-#mainPhoto{
-  width:350px;
-  opacity:0;
-  transform:scale(0.8);
-  transition:2s;
-  border-radius:20px;
-  display:block;
-  margin:20px auto;   /* bikin center horizontal */
-}
-#mainPhoto.show{
-opacity:1;
-transform:scale(1);
-}
+      60% {
+        transform: scale(1.4);
+        opacity: 0.8;
+      }
 
-/* GALLERY */
-.gallery{
-display:none;
-margin-top:30px;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-padding:20px;
-}
-.gallery img{
-width:100%;
-border-radius:15px;
-transition:0.3s;
-cursor:pointer;
-}
-.gallery:hover img{filter:blur(3px);}
-.gallery img:hover{
-transform:scale(1.1);
-filter:blur(0);
-}
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
 
-/* LOVE LETTER */
-.love-letter{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-padding:25px;
-width:300px;
-display:none;
-z-index:3000;
-}
+    /* FLOATING HEARTS */
+    .float-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatUp linear forwards;
+      opacity: 0;
+    }
 
-/* CONFETTI */
-.confetti{
-position:fixed;
-width:8px;
-height:8px;
-top:-10px;
-animation:fall linear forwards;
-}
-@keyframes fall{
-to{transform:translateY(110vh) rotate(720deg);}
-}
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+      }
 
-/* HEART */
-.heart{
-position:fixed;
-color:red;
-animation:fallHeart 5s linear forwards;
-}
-@keyframes fallHeart{
-to{transform:translateY(110vh);}
-}
+      20% {
+        opacity: 0.8;
+      }
 
-/* FIREWORK */
-.firework{
-position:fixed;
-width:6px;
-height:6px;
-border-radius:50%;
-}
-/* TOMBOL SURAT */
-#letterBtn{
-position:fixed;
-bottom:25px;
-left:25px;
-font-size:35px;
-cursor:pointer;
-z-index:2000;
-transition:0.3s;
-}
-#letterBtn:hover{
-transform:scale(1.2);
-}
+      80% {
+        opacity: 0.6;
+      }
 
-#notifDot{
-position:absolute;
-top:0;
-right:0;
-width:12px;
-height:12px;
-background:red;
-border-radius:50%;
-display:none;
-}
+      100% {
+        transform: translateY(-110vh) scale(1.1) rotate(20deg);
+        opacity: 0;
+      }
+    }
 
-/* TOAST */
-#toast{
-position:fixed;
-bottom:80px;
-left:50%;
-transform:translateX(-50%);
-background:#ff69b4;
-color:white;
-padding:10px 20px;
-border-radius:20px;
-display:none;
-z-index:3000;
-}
-/* ===== ENVELOPE PREMIUM ===== */
-#letterBtn{
-display:none; /* awalnya hidden */
-position:fixed;
-bottom:25px;
-left:25px;
-font-size:38px;
-cursor:pointer;
-z-index:3000;
-transition:0.3s;
-}
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 24px;
+      background: rgba(26, 10, 18, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(194, 24, 91, 0.25);
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+    }
 
-#letterBtn:hover{
-transform:scale(1.2);
-}
+    .navbar a {
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 7px 14px;
+      border-radius: 50px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
 
-.envelope-wrapper{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-display:none;
-z-index:5000;
-perspective:1000px;
-}
+    .navbar a:hover {
+      color: #fff;
+      background: rgba(194, 24, 91, 0.3);
+      border-color: rgba(194, 24, 91, 0.5);
+      box-shadow: 0 0 12px rgba(194, 24, 91, 0.4);
+    }
 
-.envelope{
-width:320px;
-height:200px;
-position:relative;
-background:#ffb6c1;
-border-radius:10px;
-cursor:pointer;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
-}
+    /* MODE TOGGLE */
+    .modeToggle {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      z-index: 1000;
+      cursor: pointer;
+      font-size: 0.74rem;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 7px 14px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
 
-.envelope-flap{
-position:absolute;
-width:100%;
-height:100%;
-background:#ff69b4;
-clip-path:polygon(0 0,100% 0,50% 60%);
-transform-origin:top;
-transition:1s;
-}
+    .modeToggle:hover {
+      background: rgba(194, 24, 91, 0.4);
+      color: #fff;
+    }
 
-.envelope.open .envelope-flap{
-transform:rotateX(180deg);
-}
+    /* PAGE */
+    .page {
+      display: none;
+      padding: 100px 20px 80px;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      animation: pageIn 0.5s ease forwards;
+    }
 
-.letter-paper{
-position:absolute;
-top:100%;
-left:5%;
-width:90%;
-max-height:250px;
-background:var(--paper-bg);
-color:var(--paper-text);
-padding:20px;
-border-radius:15px;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
-transition:1s;
-overflow-y:auto;
-overflow-x:hidden;
-font-family:serif;
-scroll-behavior:smooth;
-}
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
 
-.envelope.open .letter-paper{
-top:-140px;
-}
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-/* Saat amplop kebuka */
-.envelope.open .letter-paper{
-top:-140px;
-}
+    /* HEADINGS */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      text-shadow: 0 2px 20px rgba(194, 24, 91, 0.6), 0 0 40px rgba(249, 168, 37, 0.2);
+      margin-bottom: 16px;
+    }
 
-/* Scrollbar biar cakep */
-.letter-paper::-webkit-scrollbar{
-width:6px;
-}
+    /* TYPING TEXT */
+    #typingText {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 7vw, 4rem);
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(194, 24, 91, 0.7), 0 0 60px rgba(249, 168, 37, 0.3);
+      min-height: 60px;
+      margin-bottom: 12px;
+    }
 
-.letter-paper::-webkit-scrollbar-thumb{
-background:#ff69b4;
-border-radius:10px;
-}
+    #typingText::after {
+      content: '|';
+      animation: blink 0.8s infinite;
+      color: #f48fb1;
+    }
 
-.envelope.open .letter-paper{
-top:-120px;
-}
-/* ===== CLOSE BUTTON ===== */
-.close-envelope{
-position:absolute;
-top:8px;
-right:10px;
-font-size:18px;
-cursor:pointer;
-color:white;
-z-index:6000;
-}
-.envelope{
-overflow:visible;
-}
-/* ===== FIX SIZE PAPER ===== */
-.letter-paper{
-position:absolute;
-top:100%;
-left:5%;
-width:90%;
-height:180px;   /* lebih proporsional */
-background:#fffdf5;
-color:#333;
-padding:15px;
-border-radius:12px;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
-transition:1s;
-overflow-y:auto;
-font-family:serif;
-}
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
 
-/* Dark mode paper */
-.dark .letter-paper{
-background:#2b2d4a;
-color:white;
-}
+    .subtitle {
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: #f48fb1;
+      letter-spacing: 0.08em;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
 
-/* Dark mode envelope */
-.dark .envelope{
-background:#2b2d4a;
-}
+    /* MAIN PHOTO */
+    #mainPhoto {
+      width: min(340px, 85vw);
+      opacity: 0;
+      transform: scale(0.85) translateY(20px);
+      transition: 1.8s cubic-bezier(0.23, 1, 0.32, 1);
+      border-radius: 24px;
+      display: block;
+      margin: 20px auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(194, 24, 91, 0.35);
+      border: 3px solid rgba(255, 255, 255, 0.15);
+    }
 
-.dark .envelope-flap{
-background:#1e1e2f;
-}
-.wish-item{
-position:relative;
-background:var(--wish-bg);
-color:var(--paper-text);
-padding:10px;
-margin-bottom:10px;
-border-radius:10px;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
-font-size:14px;
-}
-.delete-btn{
-position:absolute;
-top:5px;
-right:8px;
-background:red;
-color:white;
-border:none;
-border-radius:50%;
-width:20px;
-height:20px;
-font-size:12px;
-cursor:pointer;
-}
-</style>
+    #mainPhoto.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 10px 10px 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      aspect-ratio: 1;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s ease;
+      display: block;
+    }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(162, 38, 78, 0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: 0.4s;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 16px;
+    }
+
+    .gallery-item-overlay span {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .gallery:hover .gallery-item {
+      filter: brightness(0.7) saturate(0.7);
+    }
+
+    .gallery-item:hover {
+      filter: brightness(1) saturate(1) !important;
+      transform: scale(1.06) translateY(-4px);
+      box-shadow: var(--shadow-rose);
+      border-color: rgba(194, 24, 91, 0.5);
+      z-index: 5;
+    }
+
+    .gallery-item:hover .gallery-item-overlay {
+      opacity: 1;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(194, 24, 91, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(194, 24, 91, 0.65);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* INPUTS */
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s;
+      resize: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(194, 24, 91, 0.7);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.2);
+    }
+
+    /* LOGIN POPUP */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 0, 6, 0.75);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9000;
+    }
+
+    .popup-content {
+      padding: 48px 40px;
+      width: min(380px, 92vw);
+      text-align: center;
+      background: rgba(30, 8, 20, 0.88);
+      border: 1px solid rgba(194, 24, 91, 0.3);
+      border-radius: 28px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(194, 24, 91, 0.15);
+      animation: popupIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    @keyframes popupIn {
+      from {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .popup-heart-deco {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      animation: heartBeat 1.5s ease infinite;
+      display: block;
+    }
+
+    @keyframes heartBeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+    }
+
+    .popup-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .popup-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: #f48fb1;
+      margin-bottom: 28px;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .popup-field {
+      margin-bottom: 14px;
+    }
+
+    .popup-field label {
+      display: block;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    /* FOOTER */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      background: rgba(10, 0, 6, 0.55);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 800;
+    }
+
+    /* LOVE LETTER */
+    .love-letter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 32px;
+      width: min(360px, 90vw);
+      display: none;
+      z-index: 8000;
+      background: rgba(30, 8, 20, 0.93);
+      border: 1px solid rgba(194, 24, 91, 0.3);
+      border-radius: 24px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(194, 24, 91, 0.2);
+      animation: popupIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .love-letter h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #f48fb1;
+      margin-bottom: 12px;
+    }
+
+    .love-letter p {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    /* PAGE ELEMENTS */
+    .page-tagline {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #f48fb1;
+      margin: 16px 0 24px;
+    }
+
+    .about-img,
+    .rizfa-img {
+      border-radius: 20px;
+      display: block;
+      box-shadow: var(--shadow-rose);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      margin: 20px auto;
+    }
+
+    .about-img {
+      max-width: min(600px, 90vw);
+    }
+
+    .rizfa-img {
+      max-width: min(380px, 85vw);
+    }
+
+    .home-desc {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 480px;
+      margin: 0 auto 28px;
+      line-height: 1.8;
+    }
+
+    /* DIVIDER */
+    .romantic-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 14px auto 20px;
+      max-width: 260px;
+      color: rgba(194, 24, 91, 0.7);
+      font-size: 1.1rem;
+    }
+
+    .romantic-divider::before,
+    .romantic-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(194, 24, 91, 0.5), transparent);
+    }
+
+    /* WISH PAGE */
+    .wish-container {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 32px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .wish-container textarea {
+      height: 140px;
+      margin-bottom: 20px;
+    }
+
+    .wish-item {
+      position: relative;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.85);
+      padding: 16px 44px 16px 16px;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: left;
+      transition: 0.3s;
+    }
+
+    .wish-item:hover {
+      border-color: rgba(194, 24, 91, 0.4);
+      background: rgba(194, 24, 91, 0.1);
+    }
+
+    .wish-item b {
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      color: #f48fb1;
+      font-size: 0.73rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .wish-item small {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.72rem;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(194, 24, 91, 0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      padding: 0;
+    }
+
+    .delete-btn:hover {
+      background: var(--rose);
+      transform: scale(1.1);
+    }
+
+    /* LETTER BTN */
+    #letterBtn {
+      display: none;
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 3000;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(194, 24, 91, 0.55);
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+    }
+
+    #letterBtn:hover {
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 8px 30px rgba(194, 24, 91, 0.7);
+    }
+
+    #notifDot {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 13px;
+      height: 13px;
+      background: var(--gold);
+      border-radius: 50%;
+      border: 2px solid #1a0a12;
+      display: none;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(249, 168, 37, 0.5);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(249, 168, 37, 0);
+      }
+    }
+
+    /* TOAST */
+    #toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: none;
+      z-index: 9999;
+      box-shadow: 0 4px 20px rgba(194, 24, 91, 0.5);
+      white-space: nowrap;
+    }
+
+    @keyframes toastIn {
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* ENVELOPE */
+    .envelope-wrapper {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 8500;
+      perspective: 1000px;
+      animation: popupIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .envelope {
+      width: min(380px, 90vw);
+      height: 240px;
+      position: relative;
+      background: linear-gradient(145deg, #4a0030, #6b1a3a);
+      border-radius: 14px;
+      overflow: visible;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(194, 24, 91, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #6b1a3a, #a3264e);
+      clip-path: polygon(0 0, 100% 0, 50% 58%);
+      transform-origin: top;
+      transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 2;
+      border-radius: 14px 14px 0 0;
+      cursor: pointer;
+    }
+
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .letter-paper {
+      position: absolute;
+      top: 105%;
+      left: 4%;
+      width: 92%;
+      height: 200px;
+      background: linear-gradient(160deg, #fff9f0, #fce4ec);
+      color: #3d0028;
+      padding: 20px 18px;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
+      overflow-y: auto;
+      font-family: 'Lato', sans-serif;
+      z-index: 1;
+    }
+
+    .letter-paper::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .letter-paper::-webkit-scrollbar-thumb {
+      background: var(--rose);
+      border-radius: 10px;
+    }
+
+    .envelope.open .letter-paper {
+      top: -120px;
+    }
+
+    .close-envelope {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 32px;
+      height: 32px;
+      background: var(--rose);
+      border-radius: 50%;
+      font-size: 15px;
+      cursor: pointer;
+      color: white;
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      transition: 0.2s;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-envelope:hover {
+      transform: scale(1.1);
+      background: var(--rose-dark);
+    }
+
+    /* CONFETTI */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      top: -10px;
+      border-radius: 2px;
+      animation: fall linear forwards;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+
+    /* FIREWORK */
+    .firework {
+      position: fixed;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* STAR CANVAS */
+    #starCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    /* PHOTO DETAIL PAGE */
+    #photoDetailPage {
+      display: none;
+      padding: 100px 20px 100px;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      animation: pageIn 0.5s ease forwards;
+    }
+
+    .photo-detail-img {
+      width: min(520px, 90vw);
+      border-radius: 24px;
+      display: block;
+      margin: 0 auto 32px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 50px rgba(194, 24, 91, 0.35);
+      border: 3px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.4s ease;
+    }
+
+    .photo-detail-img:hover {
+      transform: scale(1.02);
+    }
+
+    .photo-detail-card {
+      max-width: 560px;
+      margin: 0 auto 32px;
+      padding: 28px 32px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(194, 24, 91, 0.25);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+
+    .photo-detail-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f48fb1;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .photo-detail-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: #fff;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 16px rgba(194, 24, 91, 0.5);
+    }
+
+    .photo-detail-text {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.82);
+      white-space: pre-line;
+    }
+
+    .photo-detail-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .popup-content {
+        padding: 36px 24px;
+      }
+
+      .navbar {
+        gap: 3px;
+        padding: 12px 8px;
+      }
+
+      .navbar a {
+        font-size: 0.68rem;
+        padding: 6px 9px;
+      }
+
+      .photo-detail-card {
+        padding: 20px 18px;
+      }
+    }
+  </style>
 </head>
-<div class="navbar glass">
-<a onclick="restartHome()">Home</a>
-<a onclick="openMaps()">Lokasi</a>
-<a onclick="showPage('about')">News</a>
-<a onclick="showPage('rizfa')">Rizfa</a>
-<a onclick="showPage('wish')">Wish</a>
-</div>
 
-<div class="popup" id="loginPopup">
-<div class="popup-content glass">
-<h2>Hallo Lea 💖</h2>
-<input type="text" id="username" placeholder="Username">
-<input type="password" id="password" placeholder="Password">
-<br>
-<button onclick="login()">Masuk</button>
-</div>
-</div>
-
-<!-- TOMBOL SURAT -->
-<div id="letterBtn" onclick="openSavedWish()">
-  ✉️
-  <span id="notifDot"></span>
-</div>
-
-<!-- NOTIF POPUP -->
-<div id="toast">Wish sudah terkirim 💌 Cek di ikon surat!</div>
 <body>
 
-<div class="modeToggle glass" onclick="toggleMode()">🌙 Mode</div>
-<div class="page" id="home">
-<h1 id="typingText"></h1>
-<p>happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥</p>
-<img src="milia.jpeg" id="mainPhoto">
-<div class="gallery" id="gallery">
-<img src="25.png" onclick="openLetter(0)">
-<img src="lea.png" onclick="openLetter(1)">
-<img src="HBD.png" onclick="openLetter(2)">
-<img src="liaa.png" onclick="openLetter(3)">
-<img src="idm.png" onclick="openLetter(4)">
-<img src="liaa.png" onclick="openLetter(5)">
-</div>
-</div>
+  <canvas id="starCanvas"></canvas>
 
-<div class="page" id="about">
-<h1>News</h1>
-<img src="Lia.png" width="600">
-<p>Keep Being You!</p>
-<button onclick="restartHome()">Kembali</button>
-</div>
+  <nav class="navbar">
+    <a onclick="restartHome()">✦ Home</a>
+    <a onclick="openMaps()">📍 Rumah Lea</a>
+    <a onclick="showPage('about')">📰 News</a>
+    <a onclick="showPage('rizfa')">👨‍💻 Rizfa</a>
+    <a onclick="showPage('wish')">💌 Wish</a>
+  </nav>
 
-<div class="page" id="rizfa">
-<h1>Rizfa</h1>
-<img src="final.png" width="400">
-<p>Rizfa Ardyafa Syauqi as a Web Developer ✨</p>
-<button onclick="restartHome()">Kembali</button>
-</div>
+  <button class="modeToggle" onclick="toggleMode()" id="modeToggleBtn">🌙 Mode</button>
 
-<div class="page" id="wish">
-<h1>Wish</h1>
-
-<div class="glass" style="padding:20px; max-width:400px; margin:20px auto;">
-  <textarea id="wishInput" placeholder="Tulis harapan kamu disini..." 
-  style="width:100%; height:120px; border-radius:10px; border:none; padding:10px;"></textarea>
-  <br><br>
-  <button onclick="sendWish()">Kirim Wish 💌</button>
-</div>
-
-<button onclick="restartHome()">Kembali</button>
-</div>
-
-<div class="love-letter glass" id="letter">
-<h3>💌 Untuk Kamu</h3>
-<p id="letterText"></p>
-<button onclick="closeLetter()">Tutup</button>
-</div>
-
-<div class="footer glass">
-® Copyright by Rizfa
-</div>
-
-<audio id="bgMusic" loop>
-<source src="Hindia.mp3" type="audio/mp3">
-</audio>
-
-<script>
-const letters=[
-"maap ya kalo masih jelek, lagi belajar soalnya",
-"happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥",
-"Traktirannya jangan lupa ya leaaa",
-"ga tau lagi gua mau nulis apaan",
-"bissmillah dapet Berry Manuka Fore hehehe",
-"Sehat terus ya bub"
-];
-
-function showPage(id){
-document.querySelectorAll(".page").forEach(p=>p.style.display="none");
-document.getElementById(id).style.display="block";
-}
-
-function restartHome(){
-typingText.innerHTML="";
-mainPhoto.classList.remove("show");
-mainPhoto.style.display="block";
-gallery.style.display="none";
-showPage("home");
-typeText("🎉 Selamat Ulang Tahun! 🎂");
-
-setTimeout(()=>{mainPhoto.classList.add("show");},500);
-setTimeout(()=>{
-mainPhoto.style.display="none";
-gallery.style.display="grid";
-startConfetti();
-startHearts();
-startFireworks();
-},7000);
-}
-
-function login(){
-if(username.value==="Milia" && password.value==="123"){
-loginPopup.style.display="none";
-playMusic(); //musik hindiaaaaaa
-document.getElementById("bgMusic").play();
-restartHome();
-}else alert("Username atau Password salah!");
-}
-
-function toggleMode(){
-document.body.classList.toggle("dark");
-}
-
-function typeText(text){
-let i=0;
-function typing(){
-if(i<text.length){
-typingText.innerHTML+=text.charAt(i);
-i++; setTimeout(typing,100);
-}}
-typing();
-}
-
-function startConfetti(){
-for(let i=0;i<50;i++){
-let c=document.createElement("div");
-c.classList.add("confetti");
-c.style.left=Math.random()*100+"vw";
-c.style.backgroundColor=
-["#ff0","#ff69b4","#00f","#0f0","#f00","#0ff"][Math.floor(Math.random()*6)];
-c.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),5000);
-}}
-
-function startHearts(){
-setInterval(()=>{
-let h=document.createElement("div");
-h.classList.add("heart");
-h.innerHTML="❤";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(Math.random()*20+20)+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
-},1000);
-}
-
-function startFireworks(){
-setInterval(()=>{
-let x=Math.random()*window.innerWidth;
-let y=Math.random()*window.innerHeight/2;
-for(let i=0;i<20;i++){
-let fw=document.createElement("div");
-fw.classList.add("firework");
-fw.style.backgroundColor=
-["red","yellow","blue","lime","orange","cyan"][Math.floor(Math.random()*6)];
-fw.style.left=x+"px";
-fw.style.top=y+"px";
-let angle=Math.random()*2*Math.PI;
-let distance=Math.random()*100;
-fw.animate([
-{transform:"translate(0,0)",opacity:1},
-{transform:`translate(${Math.cos(angle)*distance}px,${Math.sin(angle)*distance}px)`,opacity:0}
-],{duration:1000});
-document.body.appendChild(fw);
-setTimeout(()=>fw.remove(),1000);
-}
-},2000);
-}
-
-function openLetter(i){
-letterText.innerText=letters[i];
-letter.style.display="block";
-}
-function closeLetter(){letter.style.display="none";}
-
-function openMaps(){
-window.open("https://www.google.com/maps/place/Jl.+Pacilong+No.18,+RT.04%2FRW.10,+Kb.+Pedes,+Kec.+Tanah+Sereal,+Kota+Bogor,+Jawa+Barat+16162/@-6.56593,106.7935206,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69c41568b4b527:0x4e446a27304314c5!8m2!3d-6.5659353!4d106.7960955!16s%2Fg%2F11j2ynfhn6?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D","_blank");
-}
-let savedWish = "";
-
-/* ===== WISH PREMIUM SYSTEM ===== */
-
-let wishes = JSON.parse(localStorage.getItem("birthdayWishes")) || [];
-
-/* Saat login tampilkan icon surat */
-function login(){
-if(username.value==="Milia" && password.value==="123"){
-loginPopup.style.display="none";
-document.getElementById("bgMusic").play();
-document.getElementById("letterBtn").style.display="block"; // tampil di home saja
-restartHome();
-}else alert("Username atau Password salah!");
-}
-
-/* Simpan banyak wish */
-function sendWish(){
-let text = document.getElementById("wishInput").value.trim();
-if(text===""){
-alert("Tulis dulu wish kamu 😆");
-return;
-}
-
-wishes.push({
-text:text,
-date:new Date().toLocaleString()
-});
-
-localStorage.setItem("birthdayWishes", JSON.stringify(wishes));
-document.getElementById("wishInput").value="";
-document.getElementById("notifDot").style.display="block";
-showToast();
-}
-
-/* Buka Inbox */
-function openSavedWish(){
-openInbox();
-}
-
-function openInbox(){
-let content = document.getElementById("letterContent");
-content.innerHTML="";
-
-if(wishes.length===0){
-content.innerHTML="<p>Belum ada wish 💭</p>";
-}else{
-wishes.forEach((w,i)=>{
-content.innerHTML+=`
-<div class="wish-item">
-<button class="delete-btn" onclick="deleteWish(${i})">×</button>
-<b>Wish ${i+1}</b><br>
-${w.text}<br>
-<small>${w.date}</small>
-</div>
-`;
-});
-}
-
-document.getElementById("envelopeBox").style.display="block";
-}
-
-function deleteWish(index){
-if(confirm("Hapus wish ini?")){
-wishes.splice(index,1);
-localStorage.setItem("birthdayWishes", JSON.stringify(wishes));
-openInbox(); // refresh tampilan
-}
-}
-
-/* Animasi buka tutup amplop */
-function toggleEnvelope(){
-document.getElementById("envelope").classList.toggle("open");
-}
-function closeEnvelope(){
-document.getElementById("envelopeBox").style.display="none";
-document.getElementById("envelope").classList.remove("open");
-}
-/* Klik luar tutup */
-window.addEventListener("click",function(e){
-if(e.target.id==="envelopeBox"){
-document.getElementById("envelopeBox").style.display="none";
-document.getElementById("envelope").classList.remove("open");
-}
-});
-let musicStarted = false;
-
-function playMusic(){
-  const music = document.getElementById("bgMusic");
-  if(!musicStarted){
-    music.play().catch(()=>{});
-    musicStarted = true;
-  }
-}
-
-/* trigger saat user klik pertama */
-document.addEventListener("click", playMusic);
-</script>
-</script>
-<!-- ENVELOPE PREMIUM -->
-<div class="envelope-wrapper" id="envelopeBox">
-  <div class="envelope" id="envelope">
-    <div class="close-envelope" onclick="closeEnvelope()">✖</div>
-    <div class="envelope-flap" onclick="toggleEnvelope()"></div>
-    <div class="letter-paper" id="letterContent"></div>
+  <div id="letterBtn" onclick="openSavedWish()">
+    ✉️
+    <span id="notifDot"></span>
   </div>
-</div>
-</div>
+
+  <div id="toast">Wish terkirim 💌 Cek di ikon surat!</div>
+
+  <div class="popup" id="loginPopup">
+    <div class="popup-content">
+      <span class="popup-heart-deco">💖</span>
+      <h2>Hallo, Lea</h2>
+      <span class="popup-subtitle">Selamat datang di halaman spesialmu ✨</span>
+      <div class="popup-field">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Masukkan username...">
+      </div>
+      <div class="popup-field">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Masukkan password..."
+          onkeydown="if(event.key==='Enter') login()">
+      </div>
+      <br>
+      <button class="btn btn-primary" onclick="login()" id="loginBtn" style="width:100%;justify-content:center;">Masuk
+        ✨</button>
+    </div>
+  </div>
+
+  <div class="page" id="home">
+    <h1 id="typingText"></h1>
+    <p class="subtitle">✨ With all the love in the world ✨</p>
+    <p class="home-desc">happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥</p>
+    <img src="milia.jpeg" id="mainPhoto" alt="Foto Milia">
+    <div class="gallery" id="gallery">
+      <div class="gallery-item" onclick="openLetter(0)">
+        <img src="25.png" alt="Foto 1">
+        <div class="gallery-item-overlay"><span>💌 Buka Surat</span></div>
+      </div>
+      <div class="gallery-item" onclick="openPhotoPage(1)">
+        <img src="lea.png" alt="Foto Lea">
+        <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
+      </div>
+      <div class="gallery-item" onclick="openPhotoPage(2)">
+        <img src="HBD.png" alt="HBD">
+        <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
+      </div>
+      <div class="gallery-item" onclick="openPhotoPage(3)">
+        <img src="liaa.png" alt="Lia">
+        <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
+      </div>
+      <div class="gallery-item" onclick="openPhotoPage(4)">
+        <img src="idm.png" alt="IDM">
+        <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
+      </div>
+      <div class="gallery-item" onclick="openPhotoPage(5)">
+        <img src="liaa.png" alt="Lia 2">
+        <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="about">
+    <h1>News</h1>
+    <div class="romantic-divider">🌹</div>
+    <img src="Lia.png" class="about-img" alt="Lia News">
+    <p class="page-tagline">Keep Being You!</p>
+    <button class="btn btn-ghost" onclick="restartHome()">← Kembali</button>
+  </div>
+
+  <div class="page" id="rizfa">
+    <h1>Rizfa</h1>
+    <div class="romantic-divider">💻</div>
+    <img src="final.png" class="rizfa-img" alt="Rizfa Dev">
+    <p class="page-tagline">Rizfa Ardyafa Syauqi as a Web Developer ✨</p>
+    <button class="btn btn-ghost" onclick="restartHome()">← Kembali</button>
+  </div>
+
+  <div class="page" id="wish">
+    <h1>Tulis Harapanmu 💌</h1>
+    <div class="romantic-divider">🌸</div>
+    <div class="wish-container">
+      <textarea id="wishInput" placeholder="Tulis harapan indahmu di sini..."></textarea>
+      <button class="btn btn-primary" onclick="sendWish()" style="width:100%;justify-content:center;">Kirim Wish
+        💌</button>
+    </div>
+    <br>
+    <button class="btn btn-ghost" onclick="restartHome()">← Kembali</button>
+  </div>
+
+  <!-- PHOTO DETAIL PAGE -->
+  <div id="photoDetailPage">
+    <h1 id="photoDetailHeading">✨</h1>
+    <div class="romantic-divider">🌹</div>
+    <img src="" id="photoDetailImg" class="photo-detail-img" alt="Foto">
+    <div class="photo-detail-card">
+      <span class="photo-detail-label">💌 Pesan dari Rizfa</span>
+      <p class="photo-detail-title" id="photoDetailTitle"></p>
+      <p class="photo-detail-text" id="photoDetailText"></p>
+    </div>
+    <div class="photo-detail-actions">
+      <button class="btn btn-ghost" onclick="backToGallery()">← Kembali ke Galeri</button>
+      <button class="btn btn-primary" onclick="restartHome()">✦ Home</button>
+    </div>
+  </div>
+
+  <div class="love-letter" id="letter">
+    <h3>💌 Untuk Kamu</h3>
+    <div class="romantic-divider">✦</div>
+    <p id="letterText"></p>
+    <button class="btn btn-primary" onclick="closeLetter()">Tutup</button>
+  </div>
+
+  <div class="envelope-wrapper" id="envelopeBox">
+    <div class="envelope" id="envelope">
+      <div class="close-envelope" onclick="closeEnvelope()">✕</div>
+      <div class="envelope-flap" onclick="toggleEnvelope()"></div>
+      <div class="letter-paper" id="letterContent"></div>
+    </div>
+  </div>
+
+  <footer class="footer">® Copyright by Rizfa · Made with 💖 for Milia</footer>
+
+  <audio id="bgMusic" loop>
+    <source src="Hindia.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    /* STAR CANVAS */
+    (function () {
+      const canvas = document.getElementById('starCanvas');
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+      for (let i = 0; i < 120; i++) {
+        stars.push({ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, r: Math.random() * 1.5 + 0.3, a: Math.random() * Math.PI * 2, speed: Math.random() * 0.008 + 0.003 });
+      }
+      function drawStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(s => {
+          s.a += s.speed;
+          const alpha = (Math.sin(s.a) + 1) / 2 * 0.75 + 0.1;
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,200,220,${alpha})`; ctx.fill();
+        });
+        requestAnimationFrame(drawStars);
+      }
+      drawStars();
+    })();
+
+    /* ROSE PETALS */
+    const petalEmojis = ['🌸', '🌺', '🌹', '💮'];
+    function spawnPetal() {
+      const p = document.createElement('div');
+      p.classList.add('petal');
+      p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+      p.style.left = Math.random() * 105 + 'vw';
+      p.style.top = '-30px';
+      p.style.fontSize = (Math.random() * 18 + 12) + 'px';
+      const dur = Math.random() * 8 + 8;
+      p.style.animationDuration = dur + 's';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), dur * 1000 + 500);
+    }
+    setInterval(spawnPetal, 1400);
+
+    /* FLOATING HEARTS */
+    function spawnHeart() {
+      const h = document.createElement('div');
+      h.classList.add('float-heart');
+      const hearts = ['❤️', '💕', '💖', '💗', '💓', '💞'];
+      h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.bottom = '-20px';
+      h.style.fontSize = (Math.random() * 14 + 10) + 'px';
+      const dur = Math.random() * 6 + 8;
+      h.style.animationDuration = dur + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), dur * 1000 + 200);
+    }
+    setInterval(spawnHeart, 2000);
+
+    /* LETTERS DATA (index 0 only — popup) */
+    const letters = [
+      "maap ya kalo masih jelek, lagi belajar soalnya 😅",
+      "happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥",
+      "Traktirannya jangan lupa ya leaaa 🍰",
+      "ga tau lagi gua mau nulis apaan 😭",
+      "bissmillah dapet Berry Manuka Fore hehehe ✨",
+      "Sehat terus ya bub 💖"
+    ];
+
+    /* PHOTO PAGE DATA (index 1–5) */
+    const photoData = [
+      null, // index 0 uses popup
+      {
+        src: 'lea.png',
+        heading: '💖 Buat Lea',
+        title: 'Happy Birthday, Milia!',
+        text: 'Selamat ulang tahun ya, Lea! 🎂\n\nSemoga yg di semogakan tersemogakan, sehat sehat org sehat. Lunas yaak buat Web ULTAHnyaa 🤣!.💕\n\n— Rizfa 🌹'
+      },
+      {
+        src: 'HBD.png',
+        heading: '🎂 Special Day',
+        title: 'Hari yang Spesial~',
+        text: 'Hari ini adalah hari yang paling spesial buat lu, karna gua buatin web ini, Lea!✨\n\n Maap kalo jelek yaak, masih belajar soalnya ini\n\nDoain gua biar cepet lulus Coolyeah yaak 🎉\n\n— Rizfa 💌'
+
+      },
+      {
+        src: 'liaa.png',
+        heading: '🌸',
+        title: 'Menyenangkan Mengenalmu',
+        text: 'Leaaa, pas lagi buat web ini, gua lagi galau li, cewe yg lagi gua deketin, dia balikan sama mantannya 😭\n\n .Tapi gpp, jadinya gua bisa fokus sama ini website HAHA. 🤣\n\nSemoga selalu dikelilingi orang-orang yang sayang sama lu yaaa Leaaa. 💖\n\n— Rizfa 🌹'
+      },
+      {
+        src: 'idm.png',
+        heading: '✨ Ngopi atuh',
+        title: 'Traktirannya jangan lupa ya leaa',
+        text: 'Kalo balik kabarin ya, biar ngopi bareng, membahas pria itu lagi wkwkwk \n\n apalagi yaak, bingung gua eyy \n\nBissmillah dapet Berry Manuka Fore hehehe ✨\n\n— Rizfa 💌'
+      },
+      {
+        src: 'liaa.png',
+        heading: '💕 Thanks To Yourself for saving you',
+        title: 'Well',
+        text: 'Ga tau aing bingung mau ngetik apalagi, kalo pake AI jadi aneh ajig 🙏\n\n nitip salam buat bapak Mulyadiii.\n\nSelamat ulang tahun sekali lagi. Semoga makin kaya raya, makmur jaya, sentosa abadi, aamiin! 🔥\n\n— Rizfa 💖'
+      }
+    ];
+
+    /* SHOW PAGE */
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => { p.style.display = 'none'; });
+      document.getElementById('photoDetailPage').style.display = 'none';
+      document.getElementById(id).style.display = 'block';
+    }
+
+    /* OPEN PHOTO PAGE */
+    function openPhotoPage(idx) {
+      const data = photoData[idx];
+      if (!data) return;
+      document.querySelectorAll('.page').forEach(p => { p.style.display = 'none'; });
+      document.getElementById('photoDetailHeading').textContent = data.heading;
+      document.getElementById('photoDetailImg').src = data.src;
+      document.getElementById('photoDetailTitle').textContent = data.title;
+      document.getElementById('photoDetailText').textContent = data.text;
+      const pg = document.getElementById('photoDetailPage');
+      pg.style.display = 'block';
+      pg.style.animation = 'none';
+      void pg.offsetWidth;
+      pg.style.animation = 'pageIn 0.5s ease forwards';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* BACK TO GALLERY */
+    function backToGallery() {
+      document.getElementById('photoDetailPage').style.display = 'none';
+      document.getElementById('home').style.display = 'block';
+      document.getElementById('gallery').style.display = 'grid';
+    }
+
+    /* RESTART HOME */
+    function restartHome() {
+      const typingText = document.getElementById('typingText');
+      const mainPhoto = document.getElementById('mainPhoto');
+      const gallery = document.getElementById('gallery');
+      typingText.innerHTML = '';
+      mainPhoto.classList.remove('show');
+      mainPhoto.style.display = 'block';
+      gallery.style.display = 'none';
+      showPage('home');
+      typeText('🎉 Selamat Ulang Tahun! 🎂');
+      setTimeout(() => mainPhoto.classList.add('show'), 400);
+      setTimeout(() => {
+        mainPhoto.style.display = 'none';
+        gallery.style.display = 'grid';
+        startConfetti();
+        startFireworks();
+      }, 7000);
+    }
+
+    let wishes = JSON.parse(localStorage.getItem('birthdayWishes')) || [];
+    let musicStarted = false;
+
+    /* LOGIN */
+    function login() {
+      const u = document.getElementById('username').value;
+      const pw = document.getElementById('password').value;
+      if (u === 'Milia' && pw === '123') {
+        document.getElementById('loginPopup').style.display = 'none';
+        document.getElementById('letterBtn').style.display = 'flex';
+        playMusic();
+        restartHome();
+      } else {
+        const btn = document.getElementById('loginBtn');
+        btn.textContent = 'Salah! Coba lagi ❌';
+        btn.style.background = 'linear-gradient(135deg,#c62828,#b71c1c)';
+        setTimeout(() => { btn.textContent = 'Masuk ✨'; btn.style.background = ''; }, 2000);
+      }
+    }
+
+    /* MODE TOGGLE */
+    function toggleMode() {
+      document.body.classList.toggle('dark');
+      document.getElementById('modeToggleBtn').textContent =
+        document.body.classList.contains('dark') ? '☀️ Mode' : '🌙 Mode';
+    }
+
+    /* TYPING */
+    function typeText(text) {
+      const el = document.getElementById('typingText');
+      el.innerHTML = ''; let i = 0;
+      function typing() { if (i < text.length) { el.innerHTML += text.charAt(i); i++; setTimeout(typing, 95); } }
+      typing();
+    }
+
+    /* CONFETTI */
+    function startConfetti() {
+      const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#f9a825', '#ffffff', '#fbc2eb', '#c2185b'];
+      for (let i = 0; i < 60; i++) {
+        setTimeout(() => {
+          const c = document.createElement('div'); c.classList.add('confetti');
+          c.style.left = Math.random() * 100 + 'vw';
+          c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          c.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+          document.body.appendChild(c); setTimeout(() => c.remove(), 5500);
+        }, i * 80);
+      }
+    }
+
+    /* FIREWORKS */
+    function startFireworks() {
+      const fwInt = setInterval(() => {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight * 0.6;
+        const colors = ['#ff69b4', '#f9a825', '#ff1493', '#fff', '#c2185b', '#fbc2eb'];
+        for (let i = 0; i < 24; i++) {
+          const fw = document.createElement('div'); fw.classList.add('firework');
+          fw.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          fw.style.left = x + 'px'; fw.style.top = y + 'px';
+          const angle = Math.random() * 2 * Math.PI, dist = Math.random() * 120 + 40;
+          fw.animate([
+            { transform: 'translate(0,0)', opacity: 1 },
+            { transform: `translate(${Math.cos(angle) * dist}px,${Math.sin(angle) * dist}px)`, opacity: 0 }
+          ], { duration: 900, easing: 'cubic-bezier(0,0,0.2,1)' });
+          document.body.appendChild(fw); setTimeout(() => fw.remove(), 950);
+        }
+      }, 2200);
+      setTimeout(() => clearInterval(fwInt), 20000);
+    }
+
+    /* LETTER */
+    function openLetter(i) { document.getElementById('letterText').innerText = letters[i]; document.getElementById('letter').style.display = 'block'; }
+    function closeLetter() { document.getElementById('letter').style.display = 'none'; }
+
+    /* MAPS */
+    function openMaps() { window.open("https://www.google.com/maps/place/Jl.+Pacilong+No.18,+RT.04%2FRW.10,+Kb.+Pedes,+Kec.+Tanah+Sereal,+Kota+Bogor,+Jawa+Barat+16162/@-6.56593,106.7935206,17z", "_blank"); }
+
+    /* WISH */
+    function sendWish() {
+      const text = document.getElementById('wishInput').value.trim();
+      if (!text) { showToast('Tulis dulu wish kamu 😆'); return; }
+      wishes.push({ text, date: new Date().toLocaleString() });
+      localStorage.setItem('birthdayWishes', JSON.stringify(wishes));
+      document.getElementById('wishInput').value = '';
+      document.getElementById('notifDot').style.display = 'block';
+      showToast('Wish terkirim 💌 Cek di ikon surat!');
+    }
+    function openSavedWish() { openInbox(); }
+    function openInbox() {
+      const content = document.getElementById('letterContent'); content.innerHTML = '';
+      if (wishes.length === 0) {
+        content.innerHTML = '<p style="color:#3d0028;text-align:center;padding:20px 0;">Belum ada wish 💭</p>';
+      } else {
+        wishes.forEach((w, i) => {
+          content.innerHTML += `<div class="wish-item"><button class="delete-btn" onclick="deleteWish(${i})">×</button><b>Wish ${i + 1}</b>${w.text}<br><small>${w.date}</small></div>`;
+        });
+      }
+      document.getElementById('envelopeBox').style.display = 'block';
+    }
+    function deleteWish(index) {
+      if (confirm('Hapus wish ini?')) { wishes.splice(index, 1); localStorage.setItem('birthdayWishes', JSON.stringify(wishes)); openInbox(); }
+    }
+    function toggleEnvelope() { document.getElementById('envelope').classList.toggle('open'); }
+    function closeEnvelope() { document.getElementById('envelopeBox').style.display = 'none'; document.getElementById('envelope').classList.remove('open'); }
+    window.addEventListener('click', e => { if (e.target.id === 'envelopeBox') closeEnvelope(); });
+
+    /* TOAST */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast'); if (msg) t.textContent = msg;
+      t.style.display = 'block'; t.style.animation = 'none'; void t.offsetWidth;
+      t.style.animation = 'toastIn 0.4s ease forwards';
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3500);
+    }
+
+    /* MUSIC */
+    function playMusic() {
+      const music = document.getElementById('bgMusic');
+      if (!musicStarted) { music.play().catch(() => { }); musicStarted = true; }
+    }
+    document.addEventListener('click', playMusic, { once: true });
+
+    /* SPARKLE ON CLICK */
+    document.addEventListener('click', e => {
+      for (let i = 0; i < 7; i++) {
+        const s = document.createElement('div'); s.classList.add('sparkle');
+        const size = Math.random() * 10 + 5;
+        s.style.width = size + 'px'; s.style.height = size + 'px';
+        s.style.left = (e.clientX + (Math.random() - 0.5) * 50) + 'px';
+        s.style.top = (e.clientY + (Math.random() - 0.5) * 50) + 'px';
+        s.style.background = `hsl(${Math.random() * 60 + 320},90%,70%)`;
+        s.style.animationDuration = (Math.random() * 0.4 + 0.4) + 's';
+        document.body.appendChild(s); setTimeout(() => s.remove(), 900);
+      }
+    });
+  </script>
 </body>
+
 </html>
