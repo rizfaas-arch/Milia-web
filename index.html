@@ -280,7 +280,7 @@
 
     /* MAIN PHOTO */
     #mainPhoto {
-      width: min(340px, 85vw);
+      width: min(520px, 90vw);
       opacity: 0;
       transform: scale(0.85) translateY(20px);
       transition: 1.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -598,7 +598,7 @@
     .home-desc {
       font-family: 'Lato', sans-serif;
       font-weight: 300;
-      font-size: 1rem;
+      font-size: 1.4rem;
       color: rgba(255, 255, 255, 0.7);
       max-width: 480px;
       margin: 0 auto 28px;
@@ -979,6 +979,104 @@
       flex-wrap: wrap;
     }
 
+    /* PHOTO NAVIGATION */
+    .photo-nav-wrapper {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto 32px;
+    }
+
+    .photo-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      z-index: 20;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      background: rgba(26, 10, 18, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(194, 24, 91, 0.45);
+      color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 12px rgba(194, 24, 91, 0.25);
+    }
+
+    .photo-nav-btn:hover {
+      background: rgba(194, 24, 91, 0.55);
+      border-color: rgba(194, 24, 91, 0.85);
+      box-shadow: 0 6px 28px rgba(194, 24, 91, 0.55), 0 0 20px rgba(194, 24, 91, 0.35);
+      transform: translateY(-50%) scale(1.12);
+      color: #fff;
+    }
+
+    .photo-nav-btn:active {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .photo-nav-btn.prev-btn {
+      left: -26px;
+    }
+
+    .photo-nav-btn.next-btn {
+      right: -26px;
+    }
+
+    .photo-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* dot indicators */
+    .photo-nav-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .photo-nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      transition: all 0.35s ease;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+    }
+
+    .photo-nav-dot.active {
+      background: var(--rose);
+      box-shadow: 0 0 10px rgba(194, 24, 91, 0.7);
+      width: 22px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .photo-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .photo-nav-btn.prev-btn {
+        left: -20px;
+      }
+
+      .photo-nav-btn.next-btn {
+        right: -20px;
+      }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 600px) {
       .gallery {
@@ -1051,12 +1149,12 @@
   <div class="page" id="home">
     <h1 id="typingText"></h1>
     <p class="subtitle">✨ With all the love in the world ✨</p>
-    <p class="home-desc">happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥</p>
+    <p class="home-desc">Happy birthday Miliaaa semoga makin kaya raya makmur jaya sentosa abadi aamiin 🔥</p>
     <img src="milia.jpeg" id="mainPhoto" alt="Foto Milia">
     <div class="gallery" id="gallery">
-      <div class="gallery-item" onclick="openLetter(0)">
+      <div class="gallery-item" onclick="openPhotoPage(0)">
         <img src="25.png" alt="Foto 1">
-        <div class="gallery-item-overlay"><span>💌 Buka Surat</span></div>
+        <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
       </div>
       <div class="gallery-item" onclick="openPhotoPage(1)">
         <img src="lea.png" alt="Foto Lea">
@@ -1075,7 +1173,7 @@
         <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
       </div>
       <div class="gallery-item" onclick="openPhotoPage(5)">
-        <img src="liaa.png" alt="Lia 2">
+        <img src="prett fix.png" alt="Lia 2">
         <div class="gallery-item-overlay"><span>💌 Lihat Foto</span></div>
       </div>
     </div>
@@ -1113,7 +1211,19 @@
   <div id="photoDetailPage">
     <h1 id="photoDetailHeading">✨</h1>
     <div class="romantic-divider">🌹</div>
-    <img src="" id="photoDetailImg" class="photo-detail-img" alt="Foto">
+
+    <!-- Foto + tombol navigasi -->
+    <div class="photo-nav-wrapper">
+      <button class="photo-nav-btn prev-btn" id="prevPhotoBtn" onclick="navigatePhoto(-1)"
+        title="Foto sebelumnya">&#8249;</button>
+      <img src="" id="photoDetailImg" class="photo-detail-img" alt="Foto">
+      <button class="photo-nav-btn next-btn" id="nextPhotoBtn" onclick="navigatePhoto(1)"
+        title="Foto selanjutnya">&#8250;</button>
+    </div>
+
+    <!-- Dot indikator -->
+    <div class="photo-nav-dots" id="photoNavDots"></div>
+
     <div class="photo-detail-card">
       <span class="photo-detail-label">💌 Pesan dari Rizfa</span>
       <p class="photo-detail-title" id="photoDetailTitle"></p>
@@ -1218,36 +1328,41 @@
 
     /* PHOTO PAGE DATA (index 1–5) */
     const photoData = [
-      null, // index 0 uses popup
+      {
+        src: '25.png',
+        heading: '🎉 Happy Birthday, Lea! 🥳',
+        title: 'Happy Birthday, Lea! 🥳',
+        text: 'Lunas yaak buat Web Ulang Tahunnya, maap klo masih jelek 😅\n\nTraktirannya jangan lupaa\n\nAlhamdulillah gua bikin web ini 1 bulan, kejar target yg iya mah😅\n\n— Rizfa 💖'
+      },
       {
         src: 'lea.png',
         heading: '💖 Buat Lea',
         title: 'Happy Birthday, Milia!',
-        text: 'Selamat ulang tahun ya, Lea! 🎂\n\nSemoga yg di semogakan tersemogakan, sehat sehat org sehat. Lunas yaak buat Web ULTAHnyaa 🤣!.💕\n\n— Rizfa 🌹'
+        text: 'Selamat ulang tahun ya, Lea! 🎂\n\nSemoga yg di semogakan tersemogakan, sehat sehat org sehat🤣.💕\n\n— Rizfa 🌹'
       },
       {
         src: 'HBD.png',
         heading: '🎂 Special Day',
-        title: 'Hari yang Spesial~',
+        title: 'Special Day',
         text: 'Hari ini adalah hari yang paling spesial buat lu, karna gua buatin web ini, Lea!✨\n\n Maap kalo jelek yaak, masih belajar soalnya ini\n\nDoain gua biar cepet lulus Coolyeah yaak 🎉\n\n— Rizfa 💌'
 
       },
       {
         src: 'liaa.png',
-        heading: '🌸',
+        heading: '🌸 Menyenangkan Mengenalmu',
         title: 'Menyenangkan Mengenalmu',
-        text: 'Leaaa, pas lagi buat web ini, gua lagi galau li, cewe yg lagi gua deketin, dia balikan sama mantannya 😭\n\n .Tapi gpp, jadinya gua bisa fokus sama ini website HAHA. 🤣\n\nSemoga selalu dikelilingi orang-orang yang sayang sama lu yaaa Leaaa. 💖\n\n— Rizfa 🌹'
+        text: 'Leaaa, pas lagi buat web ini, gua lagi galau li, cewe yg lagi gua deketin, dia balikan sama mantannya 😭\n\n Tapi gpp, jadinya gua bisa fokus sama ini website HAHA. 🤣\n\nSemoga selalu dikelilingi orang-orang yang sayang sama lu yaaa Leaaa. 💖\n\n— Rizfa 🌹'
       },
       {
         src: 'idm.png',
-        heading: '✨ Ngopi atuh',
+        heading: '✨ Traktirannya jangan lupa ya leaa',
         title: 'Traktirannya jangan lupa ya leaa',
         text: 'Kalo balik kabarin ya, biar ngopi bareng, membahas pria itu lagi wkwkwk \n\n apalagi yaak, bingung gua eyy \n\nBissmillah dapet Berry Manuka Fore hehehe ✨\n\n— Rizfa 💌'
       },
       {
-        src: 'liaa.png',
+        src: 'prett fix.png',
         heading: '💕 Thanks To Yourself for saving you',
-        title: 'Well',
+        title: 'Thanks To Yourself for saving you',
         text: 'Ga tau aing bingung mau ngetik apalagi, kalo pake AI jadi aneh ajig 🙏\n\n nitip salam buat bapak Mulyadiii.\n\nSelamat ulang tahun sekali lagi. Semoga makin kaya raya, makmur jaya, sentosa abadi, aamiin! 🔥\n\n— Rizfa 💖'
       }
     ];
@@ -1259,21 +1374,78 @@
       document.getElementById(id).style.display = 'block';
     }
 
+    /* CURRENT PHOTO INDEX */
+    let currentPhotoIdx = 0;
+
     /* OPEN PHOTO PAGE */
     function openPhotoPage(idx) {
       const data = photoData[idx];
       if (!data) return;
+      currentPhotoIdx = idx;
       document.querySelectorAll('.page').forEach(p => { p.style.display = 'none'; });
       document.getElementById('photoDetailHeading').textContent = data.heading;
       document.getElementById('photoDetailImg').src = data.src;
       document.getElementById('photoDetailTitle').textContent = data.title;
       document.getElementById('photoDetailText').textContent = data.text;
+      updateNavButtons();
+      buildDots();
       const pg = document.getElementById('photoDetailPage');
       pg.style.display = 'block';
       pg.style.animation = 'none';
       void pg.offsetWidth;
       pg.style.animation = 'pageIn 0.5s ease forwards';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* NAVIGATE PHOTO */
+    function navigatePhoto(dir) {
+      const newIdx = currentPhotoIdx + dir;
+      if (newIdx < 0 || newIdx >= photoData.length) return;
+      const img = document.getElementById('photoDetailImg');
+      // slide-out animation
+      img.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+      img.style.opacity = '0';
+      img.style.transform = dir > 0 ? 'translateX(-40px) scale(0.97)' : 'translateX(40px) scale(0.97)';
+      setTimeout(() => {
+        currentPhotoIdx = newIdx;
+        const data = photoData[currentPhotoIdx];
+        document.getElementById('photoDetailHeading').textContent = data.heading;
+        img.src = data.src;
+        document.getElementById('photoDetailTitle').textContent = data.title;
+        document.getElementById('photoDetailText').textContent = data.text;
+        updateNavButtons();
+        buildDots();
+        // slide-in animation
+        img.style.transform = dir > 0 ? 'translateX(40px) scale(0.97)' : 'translateX(-40px) scale(0.97)';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            img.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+            img.style.opacity = '1';
+            img.style.transform = 'translateX(0) scale(1)';
+          });
+        });
+      }, 260);
+    }
+
+    /* UPDATE NAV BUTTONS */
+    function updateNavButtons() {
+      document.getElementById('prevPhotoBtn').disabled = currentPhotoIdx === 0;
+      document.getElementById('nextPhotoBtn').disabled = currentPhotoIdx === photoData.length - 1;
+    }
+
+    /* BUILD DOT INDICATORS */
+    function buildDots() {
+      const container = document.getElementById('photoNavDots');
+      container.innerHTML = '';
+      photoData.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'photo-nav-dot' + (i === currentPhotoIdx ? ' active' : '');
+        dot.setAttribute('aria-label', 'Foto ' + (i + 1));
+        dot.onclick = () => {
+          if (i !== currentPhotoIdx) navigatePhoto(i - currentPhotoIdx);
+        };
+        container.appendChild(dot);
+      });
     }
 
     /* BACK TO GALLERY */
