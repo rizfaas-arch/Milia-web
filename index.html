@@ -643,61 +643,67 @@
 
     .wish-item {
       position: relative;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.85);
-      padding: 16px 44px 16px 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(194, 24, 91, 0.25);
+      color: rgba(255, 255, 255, 0.88);
+      padding: 16px 48px 16px 18px;
       margin-bottom: 12px;
-      border-radius: 14px;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      border-radius: 16px;
+      font-size: 0.92rem;
+      line-height: 1.65;
       text-align: left;
       transition: 0.3s;
+      backdrop-filter: blur(8px);
     }
 
     .wish-item:hover {
-      border-color: rgba(194, 24, 91, 0.4);
-      background: rgba(194, 24, 91, 0.1);
+      border-color: rgba(194, 24, 91, 0.55);
+      background: rgba(194, 24, 91, 0.13);
+      box-shadow: 0 4px 18px rgba(194, 24, 91, 0.18);
     }
 
     .wish-item b {
       font-family: 'Lato', sans-serif;
       font-weight: 700;
       color: #f48fb1;
-      font-size: 0.73rem;
-      letter-spacing: 0.08em;
+      font-size: 0.71rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     .wish-item small {
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 0.71rem;
+      display: block;
+      margin-top: 6px;
     }
 
     .delete-btn {
       position: absolute;
       top: 12px;
       right: 12px;
-      background: rgba(194, 24, 91, 0.6);
+      background: rgba(194, 24, 91, 0.5);
       color: white;
       border: none;
       border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      font-size: 14px;
+      width: 26px;
+      height: 26px;
+      font-size: 15px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: 0.2s;
       padding: 0;
+      line-height: 1;
     }
 
     .delete-btn:hover {
       background: var(--rose);
-      transform: scale(1.1);
+      transform: scale(1.12);
+      box-shadow: 0 0 10px rgba(194, 24, 91, 0.5);
     }
 
     /* LETTER BTN */
@@ -775,61 +781,82 @@
       }
     }
 
-    /* ENVELOPE */
+    /* ENVELOPE / INBOX MODAL */
     .envelope-wrapper {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      inset: 0;
+      background: rgba(10, 0, 6, 0.80);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: none;
+      justify-content: center;
+      align-items: center;
       z-index: 8500;
-      perspective: 1000px;
-      animation: popupIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      padding: 20px;
+    }
+
+    .envelope-wrapper.open {
+      display: flex;
+      animation: popupIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .envelope {
-      width: min(380px, 90vw);
-      height: 240px;
+      width: min(480px, 92vw);
+      max-height: 85vh;
       position: relative;
-      background: linear-gradient(145deg, #4a0030, #6b1a3a);
-      border-radius: 14px;
-      overflow: visible;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(194, 24, 91, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(160deg, #2a0a1a, #3d0030);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7), 0 0 60px rgba(194, 24, 91, 0.3);
+      border: 1px solid rgba(194, 24, 91, 0.3);
+      display: flex;
+      flex-direction: column;
     }
 
-    .envelope-flap {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(160deg, #6b1a3a, #a3264e);
-      clip-path: polygon(0 0, 100% 0, 50% 58%);
-      transform-origin: top;
-      transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
-      z-index: 2;
-      border-radius: 14px 14px 0 0;
+    .envelope-header {
+      background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .envelope-header h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.7rem;
+      color: #fff;
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .close-envelope {
+      width: 34px;
+      height: 34px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      font-size: 16px;
       cursor: pointer;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      transition: 0.2s;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      flex-shrink: 0;
     }
 
-    .envelope.open .envelope-flap {
-      transform: rotateX(180deg);
+    .close-envelope:hover {
+      transform: scale(1.12);
+      background: rgba(255, 255, 255, 0.28);
     }
 
     .letter-paper {
-      position: absolute;
-      top: 105%;
-      left: 4%;
-      width: 92%;
-      height: 200px;
-      background: linear-gradient(160deg, #fff9f0, #fce4ec);
-      color: #3d0028;
-      padding: 20px 18px;
-      border-radius: 12px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-      transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
+      flex: 1;
       overflow-y: auto;
-      font-family: 'Lato', sans-serif;
-      z-index: 1;
+      padding: 20px 22px;
+      background: transparent;
     }
 
     .letter-paper::-webkit-scrollbar {
@@ -841,33 +868,8 @@
       border-radius: 10px;
     }
 
-    .envelope.open .letter-paper {
-      top: -120px;
-    }
-
-    .close-envelope {
-      position: absolute;
-      top: -14px;
-      right: -14px;
-      width: 32px;
-      height: 32px;
-      background: var(--rose);
-      border-radius: 50%;
-      font-size: 15px;
-      cursor: pointer;
-      color: white;
-      z-index: 9000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-      transition: 0.2s;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .close-envelope:hover {
-      transform: scale(1.1);
-      background: var(--rose-dark);
+    .letter-paper::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
     }
 
     /* CONFETTI */
@@ -1244,8 +1246,10 @@
 
   <div class="envelope-wrapper" id="envelopeBox">
     <div class="envelope" id="envelope">
-      <div class="close-envelope" onclick="closeEnvelope()">✕</div>
-      <div class="envelope-flap" onclick="toggleEnvelope()"></div>
+      <div class="envelope-header">
+        <h3>💌 Wish Inbox</h3>
+        <div class="close-envelope" onclick="closeEnvelope()">✕</div>
+      </div>
       <div class="letter-paper" id="letterContent"></div>
     </div>
   </div>
@@ -1482,7 +1486,7 @@
     function login() {
       const u = document.getElementById('username').value;
       const pw = document.getElementById('password').value;
-      if (u === 'Milia' && pw === '123') {
+      if (u === 'Milia' && pw === '08-08-2001') {
         document.getElementById('loginPopup').style.display = 'none';
         document.getElementById('letterBtn').style.display = 'flex';
         playMusic();
@@ -1567,20 +1571,25 @@
     function openInbox() {
       const content = document.getElementById('letterContent'); content.innerHTML = '';
       if (wishes.length === 0) {
-        content.innerHTML = '<p style="color:#3d0028;text-align:center;padding:20px 0;">Belum ada wish 💭</p>';
+        content.innerHTML = '<p style="color:rgba(255,255,255,0.5);text-align:center;padding:30px 0;font-family:\'Dancing Script\',cursive;font-size:1.2rem;">Belum ada wish 💭</p>';
       } else {
         wishes.forEach((w, i) => {
-          content.innerHTML += `<div class="wish-item"><button class="delete-btn" onclick="deleteWish(${i})">×</button><b>Wish ${i + 1}</b>${w.text}<br><small>${w.date}</small></div>`;
+          content.innerHTML += `<div class="wish-item"><button class="delete-btn" onclick="deleteWish(${i})">×</button><b>💌 Wish ${i + 1}</b>${w.text}<small>🕐 ${w.date}</small></div>`;
         });
       }
-      document.getElementById('envelopeBox').style.display = 'block';
+      const box = document.getElementById('envelopeBox');
+      box.classList.add('open');
+      document.getElementById('notifDot').style.display = 'none';
     }
     function deleteWish(index) {
       if (confirm('Hapus wish ini?')) { wishes.splice(index, 1); localStorage.setItem('birthdayWishes', JSON.stringify(wishes)); openInbox(); }
     }
-    function toggleEnvelope() { document.getElementById('envelope').classList.toggle('open'); }
-    function closeEnvelope() { document.getElementById('envelopeBox').style.display = 'none'; document.getElementById('envelope').classList.remove('open'); }
-    window.addEventListener('click', e => { if (e.target.id === 'envelopeBox') closeEnvelope(); });
+    function closeEnvelope() {
+      const box = document.getElementById('envelopeBox');
+      box.classList.remove('open');
+      setTimeout(() => { box.style.display = ''; }, 10);
+    }
+    window.addEventListener('click', e => { if (e.target === document.getElementById('envelopeBox')) closeEnvelope(); });
 
     /* TOAST */
     let toastTimer;
