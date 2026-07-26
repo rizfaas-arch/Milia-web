@@ -343,13 +343,22 @@
 
     /* MOBILE DRAWER */
     .mobile-drawer {
-      display: none;
       position: fixed;
       top: 62px;
       left: 0;
       right: 0;
       bottom: 0;
       z-index: 850;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-drawer.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
 
     .mobile-drawer-backdrop {
@@ -357,6 +366,7 @@
       inset: 0;
       background: rgba(10, 0, 6, 0.6);
       backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .mobile-drawer-panel {
@@ -625,24 +635,26 @@
       color: #fff;
     }
 
-    .gallery:hover .gallery-item {
-      filter: brightness(0.7) saturate(0.7);
-    }
+    @media (hover: hover) {
+      .gallery:hover .gallery-item {
+        filter: brightness(0.7) saturate(0.7);
+      }
 
-    .gallery-item:hover {
-      filter: brightness(1) saturate(1) !important;
-      transform: scale(1.06) translateY(-4px);
-      box-shadow: var(--shadow-rose);
-      border-color: rgba(194, 24, 91, 0.5);
-      z-index: 5;
-    }
+      .gallery-item:hover {
+        filter: brightness(1) saturate(1) !important;
+        transform: scale(1.06) translateY(-4px);
+        box-shadow: var(--shadow-rose);
+        border-color: rgba(194, 24, 91, 0.5);
+        z-index: 5;
+      }
 
-    .gallery-item:hover .gallery-item-overlay {
-      opacity: 1;
-    }
+      .gallery-item:hover .gallery-item-overlay {
+        opacity: 1;
+      }
 
-    .gallery-item:hover img {
-      transform: scale(1.08);
+      .gallery-item:hover img {
+        transform: scale(1.08);
+      }
     }
 
     /* BUTTONS */
@@ -1378,16 +1390,17 @@
       .hamburger {
         display: flex;
       }
-
-      .mobile-drawer {
-        display: block;
-      }
     }
 
     @media (max-width: 600px) {
       .gallery {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+      }
+
+      .gallery-item-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(162, 38, 78, 0.75) 0%, transparent 70%);
       }
 
       .popup-content {
@@ -1427,6 +1440,163 @@
       .mobile-drawer {
         display: none !important;
       }
+    }
+
+    /* LIGHT MODE STYLES */
+    body.light-mode {
+      background: #fff0f5;
+      color: #330a1c;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.light-mode::before {
+      background: linear-gradient(-45deg, #fff0f5, #ffe4e1, #fbc2eb, #f48fb1, #ffe4e1);
+      opacity: 0.9;
+    }
+
+    body.light-mode #starCanvas {
+      opacity: 0.2;
+    }
+
+    body.light-mode .navbar {
+      background: rgba(255, 240, 245, 0.88);
+      border-bottom: 1px solid rgba(194, 24, 91, 0.2);
+    }
+
+    body.light-mode .navbar-brand {
+      color: #c2185b;
+      text-shadow: 0 0 15px rgba(194, 24, 91, 0.3);
+    }
+
+    body.light-mode .navbar a {
+      color: rgba(80, 20, 50, 0.8);
+    }
+
+    body.light-mode .navbar a:hover {
+      color: #880e4f;
+      background: rgba(194, 24, 91, 0.15);
+      border-color: rgba(194, 24, 91, 0.3);
+    }
+
+    body.light-mode .modeToggle,
+    body.light-mode .mobile-mode-toggle {
+      background: rgba(194, 24, 91, 0.12);
+      border-color: rgba(194, 24, 91, 0.25);
+      color: #880e4f;
+    }
+
+    body.light-mode .modeToggle:hover,
+    body.light-mode .mobile-mode-toggle:hover {
+      background: rgba(194, 24, 91, 0.25);
+      color: #880e4f;
+    }
+
+    body.light-mode .hamburger {
+      background: rgba(194, 24, 91, 0.1);
+      border-color: rgba(194, 24, 91, 0.25);
+    }
+
+    body.light-mode .hamburger span {
+      background: #880e4f;
+    }
+
+    body.light-mode .mobile-drawer-panel {
+      background: rgba(255, 245, 248, 0.98);
+      border-bottom: 1px solid rgba(194, 24, 91, 0.2);
+    }
+
+    body.light-mode .mobile-drawer-links a {
+      color: rgba(80, 20, 50, 0.85);
+      background: rgba(194, 24, 91, 0.06);
+      border-color: rgba(194, 24, 91, 0.15);
+    }
+
+    body.light-mode .mobile-drawer-links a:hover,
+    body.light-mode .mobile-drawer-links a:active {
+      color: #880e4f;
+      background: rgba(194, 24, 91, 0.18);
+    }
+
+    body.light-mode h1,
+    body.light-mode #typingText {
+      color: #880e4f;
+      text-shadow: 0 2px 20px rgba(194, 24, 91, 0.3);
+    }
+
+    body.light-mode .subtitle {
+      color: #c2185b;
+    }
+
+    body.light-mode .home-desc {
+      color: rgba(80, 20, 50, 0.85);
+    }
+
+    body.light-mode .popup-content,
+    body.light-mode .photo-detail-card,
+    body.light-mode .wish-container,
+    body.light-mode .love-letter {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(194, 24, 91, 0.3);
+      box-shadow: 0 16px 40px rgba(194, 24, 91, 0.18);
+      color: #330a1c;
+    }
+
+    body.light-mode .photo-detail-title {
+      color: #880e4f;
+    }
+
+    body.light-mode .photo-detail-text {
+      color: #4a102a;
+    }
+
+    body.light-mode input,
+    body.light-mode textarea {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(194, 24, 91, 0.3);
+      color: #330a1c;
+    }
+
+    body.light-mode input::placeholder,
+    body.light-mode textarea::placeholder {
+      color: rgba(136, 14, 79, 0.45);
+    }
+
+    body.light-mode .btn-ghost {
+      background: rgba(194, 24, 91, 0.1);
+      color: #880e4f;
+      border-color: rgba(194, 24, 91, 0.3);
+    }
+
+    body.light-mode .btn-ghost:hover {
+      background: rgba(194, 24, 91, 0.2);
+      color: #880e4f;
+    }
+
+    body.light-mode .envelope {
+      background: linear-gradient(160deg, #fff0f5, #ffe4e1);
+      border-color: rgba(194, 24, 91, 0.3);
+    }
+
+    body.light-mode .wish-item {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(194, 24, 91, 0.25);
+      color: #330a1c;
+    }
+
+    body.light-mode .wish-item small {
+      color: rgba(80, 20, 50, 0.55);
+    }
+
+    body.light-mode .footer {
+      background: rgba(255, 240, 245, 0.85);
+      color: rgba(136, 14, 79, 0.65);
+      border-top-color: rgba(194, 24, 91, 0.15);
+    }
+
+    body.light-mode .photo-nav-btn {
+      background: rgba(255, 255, 255, 0.85);
+      color: #880e4f;
+      border-color: rgba(194, 24, 91, 0.4);
     }
   </style>
 </head>
@@ -1489,9 +1659,17 @@
       <button class="modeToggle" onclick="toggleMode()" id="modeToggleBtn">
         <svg id="modeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
         </svg>
-        <span id="modeLabel">Mode</span>
+        <span id="modeLabel">Light</span>
       </button>
       <button class="navbar-logout" id="logoutBtn" onclick="logout()" style="display:none;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1564,9 +1742,17 @@
         <button class="mobile-mode-toggle" onclick="toggleMode()" id="mobileModeBtn">
           <svg id="mobileModeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </svg>
-          <span id="mobileModeLabel">Mode</span>
+          <span id="mobileModeLabel">Light</span>
         </button>
         <button class="mobile-drawer-logout" id="mobileLogoutBtn" onclick="logout(); closeDrawer()"
           style="display:none;">
@@ -1999,15 +2185,34 @@
 
     /* MODE TOGGLE */
     function toggleMode() {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      const moonSVG = `<svg id="modeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
       const sunSVG = `<svg id="modeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
-      const labelText = isDark ? 'Light' : 'Mode';
-      const iconSVG = isDark ? sunSVG : moonSVG;
-      document.getElementById('modeToggleBtn').innerHTML = iconSVG + `<span>${labelText}</span>`;
-      document.getElementById('mobileModeBtn').innerHTML = iconSVG.replace('id="modeIcon"', 'id="mobileModeIcon"') + `<span>${labelText}</span>`;
+      const moonSVG = `<svg id="modeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
+      const labelText = isLight ? 'Dark' : 'Light';
+      const iconSVG = isLight ? moonSVG : sunSVG;
+
+      const desktopBtn = document.getElementById('modeToggleBtn');
+      const mobileBtn = document.getElementById('mobileModeBtn');
+      if (desktopBtn) desktopBtn.innerHTML = iconSVG + `<span>${labelText}</span>`;
+      if (mobileBtn) mobileBtn.innerHTML = iconSVG.replace('id="modeIcon"', 'id="mobileModeIcon"') + `<span>${labelText}</span>`;
+
+      localStorage.setItem('themeMode', isLight ? 'light' : 'dark');
     }
+
+    // Restore theme mode from localStorage on load
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('themeMode');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        const moonSVG = `<svg id="modeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+        const desktopBtn = document.getElementById('modeToggleBtn');
+        const mobileBtn = document.getElementById('mobileModeBtn');
+        if (desktopBtn) desktopBtn.innerHTML = moonSVG + `<span>Dark</span>`;
+        if (mobileBtn) mobileBtn.innerHTML = moonSVG.replace('id="modeIcon"', 'id="mobileModeIcon"') + `<span>Dark</span>`;
+      }
+    })();
 
     /* TYPING */
     function typeText(text) {
